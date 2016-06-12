@@ -14,6 +14,7 @@ class IPSownCloud extends IPSModule{
 		parent::Create();
         $this->RegisterPropertyString("URL", "");
         $this->RegisterPropertyInteger("KalenderID", 0);
+        $this->RegisterPropertyInteger("Kalendername", "");
         $this->RegisterPropertyString("Username", "");
         $this->RegisterPropertyString("Password", "");
         $this->RegisterPropertyString("Feiertage", "--");
@@ -40,6 +41,7 @@ class IPSownCloud extends IPSModule{
 	
 		$url  	 =  $this->ReadPropertyString('URL');
 		$kid  	 =  $this->ReadPropertyString('KalenderID');
+		$kname	 =  $this->ReadPropertyString('Kalendername');
 		$user 	 =  $this->ReadPropertyString('Username');
 		$pass 	 =  $this->ReadPropertyString('Password');
 		$maxdays =  $this->ReadPropertyInteger('MaxDays');
@@ -49,11 +51,16 @@ class IPSownCloud extends IPSModule{
             // Status inaktiv
             $this->SetStatus(201);
         } else{
-			// KalenderID prüfen
-			if ($kid == ''){
+		// KalenderID prüfen
+		if ($kid == ''){
+			// Status inaktiv
+			$this->SetStatus(202);
+		} else{
+			// Kalendername prüfen
+			if ($kname == ''){
 				// Status inaktiv
 				$this->SetStatus(202);
-			} else{
+			} else {	 
 				// Bentuzer prüfen
 				if ($user == ''){
 					// Status inaktiv
@@ -75,6 +82,7 @@ class IPSownCloud extends IPSModule{
 				}
 			}
 		}
+        }
 
 		// Variablen anlegen
 		$this->RegisterVariableString("Heute"			, "Heute"					, "~TextBox"	, 10);
@@ -281,7 +289,7 @@ class IPSownCloud extends IPSModule{
 		$ch = curl_init();
 		//curl_setopt ($ch, CURLOPT_URL, $url."/index.php/apps/calendar/export.php?calid=".$id);
 		//OwnCloud 9 URL /remote.php/dav/calendars/david.klingelstein/muellkalender?export
-		curl_setopt ($ch, CURLOPT_URL, $url."/remote.php/dav/calendars/".$username."/".$id."?export");
+		curl_setopt ($ch, CURLOPT_URL, $url."/remote.php/dav/calendars/david.klingelstein/muellkalender?export");
 		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT,20);
