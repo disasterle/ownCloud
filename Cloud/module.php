@@ -14,7 +14,7 @@ class IPSownCloud extends IPSModule{
 		parent::Create();
         $this->RegisterPropertyString("URL", "");
         $this->RegisterPropertyInteger("KalenderID", 0);
-        $this->RegisterPropertyInteger("Kalendername", "");
+        $this->RegisterPropertyString("Kalendername", "");
         $this->RegisterPropertyString("Username", "");
         $this->RegisterPropertyString("Password", "");
         $this->RegisterPropertyString("Feiertage", "--");
