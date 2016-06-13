@@ -4,7 +4,7 @@
 		{	"type": "Label"             ,	"label":  "####### ownCloud v1.14 #######" },
 		{	"type": "Label"				,	"label": "------- ownCloud Zugangsdaten -------" },		
 		{	"type": "ValidationTextBox"	,	"name" : "URL"			,	"caption": "URL von ownCloud"	},
-		{	"type": "ValidationTextBox"	,	"name" : "KalenderID"		,	"caption": "KalenderID oder -name"	},
+		{	"type": "ValidationTextBox"	,	"name" : "KalenderID"		,	"caption": "KalenderID / -name"	},
 		{	"type": "ValidationTextBox"	,	"name" : "Username"		,	"caption": "Benutzer"	},
 		{	"type": "PasswordTextBox"	,	"name" : "Password"		,	"caption": "Passwort"	},
 		{	"type": "NumberSpinner"		,	"name" : "ownCloudVersion"	,	"caption": "ownCLoud-Version", "digits": 0	},
