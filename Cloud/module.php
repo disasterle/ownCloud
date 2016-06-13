@@ -39,12 +39,12 @@ class IPSownCloud extends IPSModule{
 		//Never delete this line!
 		parent::ApplyChanges();
 	
-		$url  	 =  $this->ReadPropertyString('URL');
-		$kid  	 =  $this->ReadPropertyString('KalenderID');
-		$kname	 =  $this->ReadPropertyString('Kalendername');
-		$user 	 =  $this->ReadPropertyString('Username');
-		$pass 	 =  $this->ReadPropertyString('Password');
-		$maxdays =  $this->ReadPropertyInteger('MaxDays');
+		$url  	 	=  $this->ReadPropertyString('URL');
+		$kid  	 	=  $this->ReadPropertyString('KalenderID');
+		$user 	 	=  $this->ReadPropertyString('Username');
+		$pass 	 	=  $this->ReadPropertyString('Password');
+		$oCVersion	=  $this->ReadPropertyString('ownCloudVersion');
+		$maxdays 	=  $this->ReadPropertyInteger('MaxDays');
 
         // Url prüfen
 		if ($url == ''){
@@ -57,7 +57,7 @@ class IPSownCloud extends IPSModule{
 			$this->SetStatus(202);
 		} else{
 			// Kalendername prüfen
-			if ($kname == ''){
+			if ($oCVersion == ''){
 				// Status inaktiv
 				$this->SetStatus(202);
 			} else {	 
@@ -254,16 +254,17 @@ class IPSownCloud extends IPSModule{
 		
 		$this->StyleText[30]  = $this->ReadPropertyBoolean('visualoldtimes');              // Sollen abgelaufene Termine von Heute angezeigt werden false = Termine nach Endzeit, werden nicht mehr angezeigt AB V1.07
 
-		$url     =  $this->ReadPropertyString('URL');
-		$kid     =  $this->ReadPropertyString('KalenderID');
-		$user    =  $this->ReadPropertyString('Username');
-		$pass 	 =  $this->ReadPropertyString('Password');
+		$url     	=  $this->ReadPropertyString('URL');
+		$kid     	=  $this->ReadPropertyString('KalenderID');
+		$user    	=  $this->ReadPropertyString('Username');
+		$pass 	 	=  $this->ReadPropertyString('Password');
+		$oCVersion	=  $this->ReadPropertyString('oCVersion');
 				
 		$this->debug   =  $this->ReadPropertyBoolean('debug');
 
 		$this->calcData = array();
 		
-		if ($this->ReadCalendar($url, $kid, $user, $pass) != false){
+		if ($this->ReadCalendar($url, $kid, $user, $pass, $oCVersion) != false){
 			$this->erzeugeKalender();
 			$this->Logging("--------  Ende  --------");
 		}
@@ -281,7 +282,7 @@ class IPSownCloud extends IPSModule{
 // Erzeugung der Wiederholungen in Unterroutine
 //
 /*****************************************************************/
-	private function ReadCalendar($url, $id, $username, $password){
+	private function ReadCalendar($url, $id, $username, $password, $oCVersion){
 
 		$this->Logging("********  Kalender: $id / User: $username  ********");
 
@@ -290,8 +291,17 @@ class IPSownCloud extends IPSModule{
 
 		$ch = curl_init();
 		//curl_setopt ($ch, CURLOPT_URL, $url."/index.php/apps/calendar/export.php?calid=".$id);
-		//OwnCloud 9 URL /remote.php/dav/calendars/david.klingelstein/muellkalender?export
-		curl_setopt ($ch, CURLOPT_URL, $url."/remote.php/dav/calendars/david.klingelstein/muellkalender?export");
+		//OwnCloud 9 URL /remote.php/dav/calendars/USER/CALNAME?export
+		
+		switch($oCVersion){
+			case '9':
+				curl_setopt ($ch, CURLOPT_URL, $url."/remote.php/dav/calendars/".$username."/".$id."?export");
+			break;
+					
+			default:
+				curl_setopt ($ch, CURLOPT_URL, $url."/index.php/apps/calendar/export.php?calid=".$id);
+		
+		}
 		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
 		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT,20);
