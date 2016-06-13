@@ -13,10 +13,10 @@ class IPSownCloud extends IPSModule{
 	public function Create(){
 		parent::Create();
         $this->RegisterPropertyString("URL", "");
-        $this->RegisterPropertyInteger("KalenderID", 0);
-        $this->RegisterPropertyString("Kalendername", "");
+        $this->RegisterPropertyString("KalenderID");
         $this->RegisterPropertyString("Username", "");
         $this->RegisterPropertyString("Password", "");
+        $this->RegisterPropertyString("ownCloudVersion", "");
         $this->RegisterPropertyString("Feiertage", "--");
         $this->RegisterPropertyInteger("MaxDays", 31);
 		$this->RegisterPropertyBoolean("visualoldtimes", true);
