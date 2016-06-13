@@ -4,13 +4,14 @@
 		{	"type": "Label"             ,	"label":  "####### ownCloud v1.14 #######" },
 		{	"type": "Label"				,	"label": "------- ownCloud Zugangsdaten -------" },		
 		{	"type": "ValidationTextBox"	,	"name" : "URL"			,	"caption": "URL von ownCloud"	},
-		{	"type": "NumberSpinner"		,	"name" : "KalenderID"	,	"caption": "Kalender ID", "digits": 0	},
-		{	"type": "ValidationTextBox"	,	"name" : "Kalendername"		,	"caption": "Kalendername"	},
+		/*{	"type": "NumberSpinner"		,	"name" : "KalenderID"	,	"caption": "Kalender ID", "digits": 0	},*/
+		{	"type": "ValidationTextBox"	,	"name" : "KalenderID"		,	"caption": "KalenderID oder -name"	},
 		{	"type": "ValidationTextBox"	,	"name" : "Username"		,	"caption": "Benutzer"	},
 		{	"type": "PasswordTextBox"	,	"name" : "Password"		,	"caption": "Passwort"	},
+		{	"type": "NumberSpinner"		,	"name" : "ownCloudVersion"	,	"caption": "ownCLoud-Version", "digits": 0	},
 
-		{	"type": "Label"				,	"label": "------- ownCloud Visualisierung -------" },		
-		{	"type": "Select"			,	"name" : "Feiertage"	,	"caption": "Bundesland Feiertage", "options": 
+		{	"type": "Label"			,	"label": "------- ownCloud Visualisierung -------" },		
+		{	"type": "Select"		,	"name" : "Feiertage"	,	"caption": "Bundesland Feiertage", "options": 
 			[
 				{	"value": "--"	, "label": "Keine Feiertage" },
 				{	"value": "BW"	, "label": "Baden-Württemberg" },
@@ -35,7 +36,7 @@
 		{	"type": "CheckBox"			,	"name": "visualoldtimes",	"caption": "Anzeige abgelaufener Termine für Heute" },
 		{	"type": "CheckBox"			,	"name": "visualreminder",	"caption": "Anzeige der Erinnerungen" },
 		{ 	"type": "SelectInstance"	,	"name": "EmailID"		, 	"caption": "EmailID SMTP" },
-		{	"type": "Select"			,	"name": "Style11"		,	"caption": "Text Datum",	"options": 
+		{	"type": "Select"		,	"name": "Style11"		,	"caption": "Text Datum",	"options": 
 			[
 				{	"label": "Super klein",	"value": "xx-small"	},
 				{	"label": "Sehr klein",	"value": "x-small"  },
