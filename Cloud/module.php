@@ -16,7 +16,7 @@ class IPSownCloud extends IPSModule{
         $this->RegisterPropertyString("KalenderID", "");
         $this->RegisterPropertyString("Username", "");
         $this->RegisterPropertyString("Password", "");
-        $this->RegisterPropertyString("ownCloudVersion", "");
+        $this->RegisterPropertyInteger("ownCloudVersion", 100);
         $this->RegisterPropertyString("Feiertage", "--");
         $this->RegisterPropertyInteger("MaxDays", 31);
 		$this->RegisterPropertyBoolean("visualoldtimes", true);
@@ -43,7 +43,7 @@ class IPSownCloud extends IPSModule{
 		$kid  	 	=  $this->ReadPropertyString('KalenderID');
 		$user 	 	=  $this->ReadPropertyString('Username');
 		$pass 	 	=  $this->ReadPropertyString('Password');
-		$oCVersion	=  $this->ReadPropertyString('ownCloudVersion');
+		$oCVersion	=  $this->ReadPropertyInteger('ownCloudVersion');
 		$maxdays 	=  $this->ReadPropertyInteger('MaxDays');
 
         // Url prüfen
@@ -258,7 +258,7 @@ class IPSownCloud extends IPSModule{
 		$kid     	=  $this->ReadPropertyString('KalenderID');
 		$user    	=  $this->ReadPropertyString('Username');
 		$pass 	 	=  $this->ReadPropertyString('Password');
-		$oCVersion	=  $this->ReadPropertyString('oCVersion');
+		$oCVersion	=  $this->ReadPropertyInteger('ownCloudVersion');
 				
 		$this->debug   =  $this->ReadPropertyBoolean('debug');
 
