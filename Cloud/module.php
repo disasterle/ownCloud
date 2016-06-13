@@ -85,17 +85,17 @@ class IPSownCloud extends IPSModule{
         }
 
 		// Variablen anlegen
-		$this->RegisterVariableString("Heute"			, "Heute"					, "~TextBox"	, 10);
-		$this->RegisterVariableString("Morgen"			, "Morgen"					, "~TextBox"	, 20);
-		$this->RegisterVariableString("Uebermorgen"		, "Übermorgen"				, "~TextBox"	, 30);
-		$this->RegisterVariableString("Ueberuebermorgen", "Überübermorgen"			, "~TextBox"	, 40);
-		$this->RegisterVariableString("HeuteMorgen"		, "Heute & Morgen"			, "~TextBox"	, 50);
-		$this->RegisterVariableString("NaechsteTermine"	, "Nächste Termine"			, "~TextBox"	, 60);
-		$this->RegisterVariableString("Kalender"		, "Kalender"				, "~HTMLBox"	, 100);
-		$this->RegisterVariableBoolean("NeuesUpdate"	, "Neues Update vorhanden"	, ""			, 200);
-		$this->RegisterVariableBoolean("Urlaub"			, "Heute Urlaub"			, ""			, 210);
-		$this->RegisterVariableString("Wecken"			, "Heute"					, "~TextBox"	, 10);
-		$this->RegisterScript("UserAktion"				, "User Aktions Script"		,
+		$this->RegisterVariableString("Heute"			, "Heute"			, "~String"	, 10);
+		$this->RegisterVariableString("Morgen"			, "Morgen"			, "~String"	, 20);
+		$this->RegisterVariableString("Uebermorgen"		, "Übermorgen"			, "~String"	, 30);
+		$this->RegisterVariableString("Ueberuebermorgen"	, "Überübermorgen"		, "~String"	, 40);
+		$this->RegisterVariableString("HeuteMorgen"		, "Heute & Morgen"		, "~String"	, 50);
+		$this->RegisterVariableString("NaechsteTermine"		, "Nächste Termine"		, "~TextBox"	, 60);
+		$this->RegisterVariableString("Kalender"		, "Kalender"			, "~HTMLBox"	, 100);
+		$this->RegisterVariableBoolean("NeuesUpdate"		, "Neues Update vorhanden"	, ""		, 200);
+		$this->RegisterVariableBoolean("Urlaub"			, "Heute Urlaub"		, ""		, 210);
+		$this->RegisterVariableString("Wecken"			, "Wecken"			, "~String"	, 10);
+		$this->RegisterScript("UserAktion"			, "User Aktions Script"		,
 '<?
 /*****************************************************************/
 //
@@ -134,11 +134,13 @@ class IPSownCloud extends IPSModule{
 
 	}
 ?>', 300);
+
+
 		IPS_SetHidden($this->GetIDForIdent('UserAktion'), true);
-
+	
 		// 1 Minuten Timer
-       	$this->RegisterTimer("Timer", 60*1000, 'OWN_Update($_IPS[\'TARGET\']);');
-
+	       	$this->RegisterTimer("Timer", 60*1000, 'OWN_Update($_IPS[\'TARGET\']);');
+	
 		// Nach übernahme der Einstellungen oder IPS-Neustart einmal Update durchführen.
 		$this->Update();
 	}
