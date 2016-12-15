@@ -206,7 +206,7 @@ class IPSownCloud extends IPSModule{
 			{
 				$ModulInfoAR = (@MC_GetModuleRepositoryInfo($ModulInstanzID, $Modulname));
 				print_r($ModulInfoAR);
-				if ($ModulInfoAR["ModuleLocalCommit"] <> $ModulInfoAR["ModuleRemoteCommit"])
+				if ($ModulInfoAR["ModuleCommit"] <> $ModulInfoAR["ModuleRemoteCommit"])
 				{
 					$ret = "Eine neue Version ist verf&uumlgbar";
 					IPS_LogMessage("ownCloud-Modul", "Eine neue Version ist verfügbar!");
